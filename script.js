@@ -46,9 +46,10 @@ const newBook = document.getElementById("createBook");
 const submitBtn = document.getElementById("submit");
 const dialog = document.getElementById("dialog")
 
-// const title = document.getElementById()
+
 const input = document.querySelectorAll("input");
 
+const myForm = document.getElementById("myForm");
 
 submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -59,8 +60,7 @@ submitBtn.addEventListener("click", (e) => {
     addBookToLibrary(...newBookVal, myLibrary);
     displayBooks(myLibrary);
 
-    input.value = "";
-    dialog.returnValue = "";
+    myForm.reset();
     dialog.close();
 })
 
