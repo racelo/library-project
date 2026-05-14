@@ -1,4 +1,7 @@
 const myLibrary = [];
+const tblBody = document.querySelector("tbody");
+const dialog = document.getElementById("dialog")
+const formElem = document.querySelector("form");
 
 function Book(title, author, pages, readStatus) {
     this.title = title;
@@ -12,14 +15,6 @@ function addBookToLibrary(title, author, pages, readStatus, arr) {
     let book = new Book(title, author, pages, readStatus);
     arr.push(book);
 }
-
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, "read", myLibrary)
-addBookToLibrary("Deep Work", "Cal Newport", 296, "read", myLibrary)
-
-// console.log(myLibrary);
-
-const tblBody = document.querySelector("tbody");
-const tbleNodeList = Array.from(tblBody.childNodes);
 
 function displayBooks(arr) {
     for(let book of arr) {
@@ -41,29 +36,26 @@ function displayBooks(arr) {
     }
 }
 
-
-const newBook = document.getElementById("createBook");
-const submitBtn = document.getElementById("submit");
-const dialog = document.getElementById("dialog")
-
-
-const input = document.querySelectorAll("input");
-
-const myForm = document.getElementById("myForm");
-
-submitBtn.addEventListener("click", (e) => {
+formElem.addEventListener("submit", (e) => {
     e.preventDefault();
-    const newBookVal = [];
-    for(let i = 0; i < input.length; i++){
-        newBookVal.push(input[i].value)
-    }
-    addBookToLibrary(...newBookVal, myLibrary);
-    displayBooks(myLibrary);
+
+    new FormData(myForm)
 
     myForm.reset();
     dialog.close();
+
+    displayBooks(myLibrary);
 })
 
-// displayBooks(myLibrary)
+myForm.addEventListener("formdata", (e) => {
+    // console.log("formdata fired");
 
+    const data = e.formData;
+    const formValues = [];
+    for( const value of data.values()) {
+        formValues.push(value); 
+    }
+    console.log(formValue);
+    addBookToLibrary(...formValues, myLibrary); 
+})
 
