@@ -55,7 +55,7 @@ myForm.addEventListener("formdata", (e) => {
     for( const value of data.values()) {
         formValues.push(value); 
     }
-    console.log(formValue);
+    // console.log(formValues);
     addBookToLibrary(...formValues, myLibrary); 
 })
 
